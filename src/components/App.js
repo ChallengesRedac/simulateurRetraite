@@ -324,7 +324,7 @@ function App() {
                 <React.Fragment>
                   <Typography level="h2" fontSize="26px">
                     <Typography color="primary" level="h2" fontSize="23px">
-                      <Filter1OutlinedIcon />Etape {activeStep + 1} :
+                      <Filter1OutlinedIcon /> Étape {activeStep + 1} :
                     </Typography>
                     {titreEtape[activeStep]}
                   </Typography>
