@@ -1,7 +1,7 @@
 {
   "name": "mon_simulateur",
   "version": "0.1.0",
-  "homepage": "https://rm950.github.io/simulateurRetraite",
+  "homepage": "https://rm951.github.io/simulateurRetraite",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
