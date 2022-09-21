@@ -1,6 +1,7 @@
 {
   "name": "mon_simulateur",
   "version": "0.1.0",
+  "homepage": "https://rm950.github.io/simulateurRetraite",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -20,6 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -44,6 +48,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.9",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
   }
