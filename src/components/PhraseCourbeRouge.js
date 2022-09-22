@@ -47,7 +47,7 @@ const PhraseCourbeRouge = ({
           <ShowChartIcon /> la courbe rouge
         </Typography>
         , votre réforme aboutirait à ce que les retraités qui partiront à la
-        retraite en 2070 passeront une proportion de leur vie{" "}
+        retraite en 2070 passeront {" "}
         <Typography variant="span" color="primary" fontWeight="bold">
           {texteDureeRetraite}
         </Typography>{" "}
