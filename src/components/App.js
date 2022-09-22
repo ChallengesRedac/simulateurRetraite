@@ -29,6 +29,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepContent from "@mui/material/StepContent";
 import StepLabel from "@mui/material/StepLabel";
+import StepButton from "@mui/material/StepButton";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -276,196 +277,189 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="p-12 flex items-center justify-center">
+      <div className="">
         <Box sx={{ maxWidth: "800px" }}>
-          <Card>
-            <CardContent>
-              <Stack spacing={4}>
-                <Typography variant="h1" fontSize={sizeH1}>
-                  Simulez votre propre réforme des retraites
-                  <Typography variant="h1" fontSize={sizeH1} color="primary">
-                    et observez son impact jusqu'en 2070
-                  </Typography>
-                </Typography>
+          <Stack spacing={4}>
+            <Typography variant="h1" fontSize={sizeH1}>
+              Simulez votre propre réforme des retraites
+              <Typography variant="h1" fontSize={sizeH1} color="primary">
+                et observez son impact jusqu'en 2070
+              </Typography>
+            </Typography>
 
-                <div>
-                  <Stepper
-                    id="debutEtape"
-                    activeStep={activeStep}
-                    style={{ padding: "24px 0px 24px 0px" }}
-                  >
-                    {steps.map((label, index) => {
-                      const stepProps = {};
-                      const labelProps = {};
-                      if (isStepOptional(index)) {
-                        labelProps.optional = (
-                          <Typography variant="caption">Optional</Typography>
-                        );
-                      }
-                      if (isStepSkipped(index)) {
-                        stepProps.completed = false;
-                      }
-                      return (
-                        <Step key={label} {...stepProps}>
-                          <StepLabel {...labelProps}>
-                            <Button
-                              color="inherit"
-                              onClick={() => handleChangeStep(index)}
-                              sx={{ mr: 1 }}
-                            >
-                              {label}
-                            </Button>
-                          </StepLabel>
-                        </Step>
+            <div>
+              <Box sx={{ width: "100%"}}>
+                <Stepper
+                  id="debutEtape"
+                  activeStep={activeStep}
+                  style={{ padding: "30px 0px 30px 0px" }}
+                >
+                  {steps.map((label, index) => {
+                    const stepProps = {};
+                    const labelProps = {};
+                    if (isStepOptional(index)) {
+                      labelProps.optional = (
+                        <Typography variant="caption">Optional</Typography>
                       );
-                    })}
-                  </Stepper>
+                    }
+                    if (isStepSkipped(index)) {
+                      stepProps.completed = false;
+                    }
+                    return (
+                      <Step key={label} {...stepProps}>
+                        <StepLabel {...labelProps}>
+                          <Button
+                            color="inherit"
+                            onClick={() => handleChangeStep(index)}
+                            sx={{ height: "20vh", width: "0.1vh" }}
+                          >
+                            {label}
+                          </Button>
+                        </StepLabel>
+                      </Step>
+                    );
+                  })}
+                </Stepper>
+              </Box>
 
-                  <React.Fragment>
-                    <Typography level="h2" fontSize="26px">
-                      <Typography color="primary" level="h2" fontSize="23px">
-                        {activeStep === 0 ? <Filter1OutlinedIcon /> : activeStep === 1 ? <Filter2OutlinedIcon /> : <Filter3OutlinedIcon />} Étape {activeStep + 1} :
-                      </Typography>
-                      {titreEtape[activeStep]}
-                    </Typography>
-                    <Typography>
-                      {messageExplicationProjection[activeStep]}
-                      C'est ce que montre{" "}
-                      <Typography
-                        variant="span"
-                        color="#959da2"
-                        fontWeight="bold"
-                      >
-                        <ShowChartIcon /> la courbe grise
-                      </Typography>{" "}
-                      ci-dessous.{" "}
-                    </Typography>
-                    <Typography>
-                      {messageExplicationAction[activeStep]}
-                    </Typography>
-                    <ReglageParametres
-                      ageDepart={ageDepart}
-                      baseAgeDepart={baseAgeDepart}
-                      handleAgeDepart={handleAgeDepart}
-                      niveauCotisationUtilisateur={niveauCotisationUtilisateur}
-                      baseNiveauCotisation={baseNiveauCotisation}
-                      handleNiveauCotisationUtilisateur={
-                        handleNiveauCotisationUtilisateur
-                      }
-                      pensionMoyenne={pensionMoyenne}
-                      basePensionMoyenne={basePensionMoyenne}
-                      handlePensionMoyenne={handlePensionMoyenne}
-                    />
-
-                    {parametresModifies ? (
-                      <PhraseCourbeRouge
-                        step={activeStep}
-                        texteEquilibreFinancier={texteEquilibreFinancier}
-                        texteNiveauVie={texteNiveauVie}
-                        texteDureeRetraite={texteDureeRetraite}
-                      />
-                    ) : null}
+              <React.Fragment>
+                <Typography level="h2" fontSize="26px">
+                  <Typography color="primary" level="h2" fontSize="23px">
                     {activeStep === 0 ? (
-                      <ChartSoldeFinancier
-                        soldeFinancierSansReforme={calculerSoldeTouteAnnee(
-                          0,
-                          contexteSocioEco,
-                          1,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
-                          0,
-                          contexteSocioEco,
-                          0,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        parametresModifies={parametresModifies}
-                      />
+                      <Filter1OutlinedIcon />
                     ) : activeStep === 1 ? (
-                      <ChartNiveauVie
-                        soldeFinancierSansReforme={calculerSoldeTouteAnnee(
-                          1,
-                          contexteSocioEco,
-                          1,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
-                          1,
-                          contexteSocioEco,
-                          0,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        parametresModifies={parametresModifies}
-                      />
+                      <Filter2OutlinedIcon />
                     ) : (
-                      <ChartTempsRetraite
-                        soldeFinancierSansReforme={calculerSoldeTouteAnnee(
-                          2,
-                          contexteSocioEco,
-                          1,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
-                          2,
-                          contexteSocioEco,
-                          0,
-                          niveauCotisationUtilisateur / 100,
-                          ageDepart,
-                          pensionMoyenne
-                        )}
-                        parametresModifies={parametresModifies}
-                      />
+                      <Filter3OutlinedIcon />
+                    )}{" "}
+                    Étape {activeStep + 1} :
+                  </Typography>
+                  {titreEtape[activeStep]}
+                </Typography>
+                <Typography>
+                  {messageExplicationProjection[activeStep]}
+                  C'est ce que montre{" "}
+                  <Typography variant="span" color="#959da2" fontWeight="bold">
+                    <ShowChartIcon /> la courbe grise
+                  </Typography>{" "}
+                  ci-dessous.{" "}
+                </Typography>
+                <Typography>{messageExplicationAction[activeStep]}</Typography>
+                <ReglageParametres
+                  ageDepart={ageDepart}
+                  baseAgeDepart={baseAgeDepart}
+                  handleAgeDepart={handleAgeDepart}
+                  niveauCotisationUtilisateur={niveauCotisationUtilisateur}
+                  baseNiveauCotisation={baseNiveauCotisation}
+                  handleNiveauCotisationUtilisateur={
+                    handleNiveauCotisationUtilisateur
+                  }
+                  pensionMoyenne={pensionMoyenne}
+                  basePensionMoyenne={basePensionMoyenne}
+                  handlePensionMoyenne={handlePensionMoyenne}
+                />
+
+                {parametresModifies ? (
+                  <PhraseCourbeRouge
+                    step={activeStep}
+                    texteEquilibreFinancier={texteEquilibreFinancier}
+                    texteNiveauVie={texteNiveauVie}
+                    texteDureeRetraite={texteDureeRetraite}
+                  />
+                ) : null}
+                {activeStep === 0 ? (
+                  <ChartSoldeFinancier
+                    soldeFinancierSansReforme={calculerSoldeTouteAnnee(
+                      0,
+                      contexteSocioEco,
+                      1,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
                     )}
+                    soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
+                      0,
+                      contexteSocioEco,
+                      0,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
+                    )}
+                    parametresModifies={parametresModifies}
+                  />
+                ) : activeStep === 1 ? (
+                  <ChartNiveauVie
+                    soldeFinancierSansReforme={calculerSoldeTouteAnnee(
+                      1,
+                      contexteSocioEco,
+                      1,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
+                    )}
+                    soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
+                      1,
+                      contexteSocioEco,
+                      0,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
+                    )}
+                    parametresModifies={parametresModifies}
+                  />
+                ) : (
+                  <ChartTempsRetraite
+                    soldeFinancierSansReforme={calculerSoldeTouteAnnee(
+                      2,
+                      contexteSocioEco,
+                      1,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
+                    )}
+                    soldeFinancierAvecReforme={calculerSoldeTouteAnnee(
+                      2,
+                      contexteSocioEco,
+                      0,
+                      niveauCotisationUtilisateur / 100,
+                      ageDepart,
+                      pensionMoyenne
+                    )}
+                    parametresModifies={parametresModifies}
+                  />
+                )}
 
-                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                      <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                        href="#debutEtape"
-                      >
-                        Retour
-                      </Button>
-                      <Box sx={{ flex: "1 1 auto" }} />
-                      {isStepOptional(activeStep) && (
-                        <Button
-                          color="inherit"
-                          onClick={handleSkip}
-                          sx={{ mr: 1 }}
-                        >
-                          Skip
-                        </Button>
-                      )}
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                    href="#debutEtape"
+                  >
+                    Retour
+                  </Button>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  {isStepOptional(activeStep) && (
+                    <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                      Skip
+                    </Button>
+                  )}
 
-                      <Button
-                        onClick={
-                          activeStep === steps.length - 1
-                            ? handleReset
-                            : handleNext
-                        }
-                        href="#debutEtape"
-                      >
-                        {activeStep === steps.length - 1
-                          ? "Recommencer"
-                          : "Suivant"}
-                      </Button>
-                    </Box>
-                  </React.Fragment>
-                </div>
-              </Stack>
-            </CardContent>
-          </Card>
+                  <Button
+                    onClick={
+                      activeStep === steps.length - 1 ? handleReset : handleNext
+                    }
+                    href="#debutEtape"
+                  >
+                    {activeStep === steps.length - 1
+                      ? "Recommencer"
+                      : "Suivant"}
+                  </Button>
+                </Box>
+              </React.Fragment>
+            </div>
+          </Stack>
         </Box>
       </div>
     </ThemeProvider>
