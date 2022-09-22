@@ -311,7 +311,7 @@ function App() {
                           <Button
                             color="inherit"
                             onClick={() => handleChangeStep(index)}
-                            sx={{ height: "20vh", width: "0.1vh" }}
+                            sx={{ height: "8vh", width: "0.1vh" }}
                           >
                             {label}
                           </Button>
