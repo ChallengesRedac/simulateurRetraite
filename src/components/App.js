@@ -45,7 +45,7 @@ const steps = [
 ];
 
 const titreEtape = [
-  "Retrouvez l'équilibre financier",
+  "Retrouvez TEST l'équilibre financier",
   "Sauvegardez le niveau de vie des retraités",
   "Veillez à la durée de la retraite",
 ];
